@@ -1,0 +1,78 @@
+{
+  "version": 4,
+  "extraction": {
+    "resultPipeline": [
+      {
+        "configuration": {
+          "property": "ip",
+          "xpaths": [
+            ".//td[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" ip \")]"
+          ],
+          "regexp" : "/(.*):/"
+        }
+      },
+      {
+        "configuration": {
+          "property": "port",
+          "xpaths": [
+            ".//td[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" port \")]"
+          ]
+        }
+      },
+      {
+        "configuration": {
+          "property": "anonymity",
+          "xpaths": [
+            "./td[4][not(@id)][not(@class)][not(@style)]"
+          ]
+        }
+      },
+      {
+        "configuration": {
+          "property": "country",
+          "xpaths": [
+            "./td[6][not(@id)][not(@class)][not(@style)]"
+          ]
+        }
+      },
+      {
+        "configuration": {
+          "type": "URL",
+          "property": "isp",
+          "xpaths": [
+            ".//a[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" nothingYet \")]"
+          ]
+        }
+      },
+      {
+        "configuration": {
+          "property": "last_checked",
+          "xpaths": [
+            "./td[8][not(@id)][not(@class)][not(@style)]"
+          ]
+        }
+      },
+      {
+        "configuration": {
+          "property": "speed",
+          "xpaths": [
+            "./td[9][not(@id)][not(@class)][not(@style)]"
+          ]
+        }
+      }
+    ],
+    "resultXPaths": [
+      "//*[(@id = \"inner\")]"
+    ],
+    "rowXPaths":[
+      "//*[contains(concat( \" \", @class, \" \" ), concat( \" \", \"proxy\", \" \" ))]//tbody//tr"
+    ]
+  },
+  "urlProperties": [
+    "isp"
+  ],
+  "playback": {
+    "url": "${webpage/url}",
+    "fixHtml": true
+  }
+}

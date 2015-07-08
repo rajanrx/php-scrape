@@ -1,0 +1,50 @@
+{
+  "name": "rajanrx/php-scrape",
+  "description": "A scraping framework written in PHP",
+  "keywords": [
+    "scrape",
+    "framework",
+    "php"
+  ],
+  "homepage": "https://github.com/rajanrx/php-scrape",
+  "type": "project",
+  "license": "MIT",
+  "support": {
+    "issues": "http://rajanr.info",
+    "source": "https://github.com/rajanrx/php-scrape"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "behat/mink": "~1.6",
+    "behat/mink-browserkit-driver": "~1.2",
+    "behat/mink-goutte-driver": "~1.1",
+    "behat/mink-selenium2-driver": "~1.2",
+    "behat/mink-zombie-driver": "~1.2"
+  },
+  "require-dev": {
+    "jonnyw/php-phantomjs": "3.1.*",
+    "php-curl-class/php-curl-class": "3.5.5",
+    "guzzlehttp/cache-subscriber": "0.1.*@dev"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "bin-dir": "bin"
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
+  },
+  "extra": {
+    "asset-installer-paths": {
+      "npm-asset-library": "vendor/npm",
+      "bower-asset-library": "vendor/bower"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Scraper\\": "scraper"
+    }
+  }
+}
