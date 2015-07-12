@@ -16,11 +16,12 @@ namespace Scraper\Scrape\Extractor\Types;
 class MultipleRowExtractor extends SingleRowExtractor{
 
     /**
-     * @var null
+     * @var null Stops crawling after matching hash
      */
     public $stopAtHash = null;
 
     /**
+     * {@inheritdoc}
      * @param null $rootElement
      *
      * @return array

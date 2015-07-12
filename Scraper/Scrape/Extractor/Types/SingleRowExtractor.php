@@ -19,6 +19,7 @@ class SingleRowExtractor extends BaseExtractor {
 
 
     /**
+     * {@inheritdoc}
      * @param null $rootElement
      *
      * @return array
@@ -80,6 +81,7 @@ class SingleRowExtractor extends BaseExtractor {
     }
 
     /**
+     * Parses regular expression
      * @param $string
      * @param $regex
      *

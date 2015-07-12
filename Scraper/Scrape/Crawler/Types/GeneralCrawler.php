@@ -17,12 +17,13 @@ use Scraper\Scrape\Crawler\BaseCrawler;
 
 
 /**
- * Class ReviewCrawler
- * @package app\models\crawl\factory
+ * Class GeneralCrawler
+ * @package Scraper\Scrape\Crawler\Types
  */
 class GeneralCrawler extends BaseCrawler{
 
     /**
+     * {@inheritdoc}
      * @return \Behat\Mink\Element\DocumentElement
      */
     public function getPage() {
@@ -36,6 +37,7 @@ class GeneralCrawler extends BaseCrawler{
     }
 
     /**
+     * {@inheritdoc}
      * @param null $nextPageSelector
      *
      * @return \Behat\Mink\Element\DocumentElement|null
@@ -51,6 +53,7 @@ class GeneralCrawler extends BaseCrawler{
     }
 
     /**
+     * {@inheritdoc}
      * @param null $nextPageSelector
      *
      * @return bool
@@ -88,7 +91,7 @@ class GeneralCrawler extends BaseCrawler{
     }
 
     /**
-     *
+     * {@inheritdoc}
      * @param Proxy $proxy
      *
      * @return mixed|void
@@ -126,6 +129,7 @@ class GeneralCrawler extends BaseCrawler{
     }
 
     /**
+     * {@inheritdoc}
      * @return array
      */
     public function getPageHistory() {

@@ -25,37 +25,39 @@ use Scraper\Proxy\Structure\Proxy;
 abstract class BaseCrawler {
 
     /**
-     * @var
+     * @var null Current url of the website
      */
     public $currentUrl;
     /**
-     * @var null
+     * @var null Next page selector
      */
     public $nextPageSelector;
     /**
-     * @var bool
+     * @var bool Set true if javascript is required. Default false
      */
     public $javaScriptRequired;
     /**
-     * @var
+     * @var null Not used
      */
     public $terminateNextPage;
     /**
-     * @var int
+     * @var int Maximum number of pages to crawl
      */
     public $maxPages = 0;
 
 
     /**
-     * @var Mink
+     * @var Mink Driver for browsing web
      */
     protected $browser;
     /**
-     * @var array
+     * @var array History of url being crawled
      */
     protected $pageHistory = array();
 
     /**
+     * Initialize crawler
+     * Setting Javascript enabled to true automatically selects Selenium2 as a default web browser driver
      * @param $currentUrl
      * @param null $nextPageSelector
      * @param bool $javaScriptRequired
@@ -66,11 +68,12 @@ abstract class BaseCrawler {
         $this->nextPageSelector   = $nextPageSelector;
         $this->javaScriptRequired = $javaScriptRequired;
 
-        $this->getBrowser($driver);
+        $this->setBrowser($driver);
         $this->setPageHistory();
     }
 
     /**
+     * Return class name
      * @return string
      */
     public static function className(){
@@ -78,6 +81,7 @@ abstract class BaseCrawler {
     }
 
     /**
+     * Sets relay network ahead of the url. Useful when using TOR Relay networks
      * @param $relayNetwork
      */
     public function setRelayNetwork($relayNetwork){
@@ -86,11 +90,13 @@ abstract class BaseCrawler {
     }
 
     /**
+     * Gets current page
      * @return \Behat\Mink\Element\DocumentElement
      */
     abstract public  function getPage();
 
     /**
+     * Gets Next page if pagination selector is provided
      * @param null $nextPageSelector
      *
      * @return mixed
@@ -98,6 +104,7 @@ abstract class BaseCrawler {
     abstract public function  getNextPage($nextPageSelector = null);
 
     /**
+     * Sets next page using provided selector
      * @param null $nextPageSelector
      *
      * @return mixed
@@ -105,6 +112,7 @@ abstract class BaseCrawler {
     abstract public function setNextPage($nextPageSelector = null);
 
     /**
+     * Sets Proxy in the browser driver to allow anonymous scraping
      * @param Proxy $proxy
      *
      * @return mixed
@@ -112,12 +120,13 @@ abstract class BaseCrawler {
     abstract public function setProxy(Proxy $proxy);
 
     /**
+     * Return visited page history
      * @return mixed
      */
     abstract public function getPageHistory();
 
     /**
-     *
+     * Sets page history
      */
     protected function setPageHistory(){
         $this->pageHistory[] = [
@@ -126,6 +135,8 @@ abstract class BaseCrawler {
     }
 
     /**
+     * Checks if next page selector is enabled
+     * Not implemented properly yet. Default is false which means the next page selector is enabled all the time
      * @param Element $element
      *
      * @return bool
@@ -136,9 +147,10 @@ abstract class BaseCrawler {
     }
 
     /**
+     * Sets the browser driver depending on the javascript select parameter or injected browser driver
      * @param Session $driver
      */
-    private function getBrowser(Session $driver = null){
+    private function setBrowser(Session $driver = null){
 
         if($driver != null){
 

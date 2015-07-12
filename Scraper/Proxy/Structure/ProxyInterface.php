@@ -9,17 +9,23 @@
 namespace Scraper\Proxy\Structure;
 
 
+
 /**
  * Interface ProxyInterface
- * @package app\models\proxy
+ * @package Scraper\Proxy\Structure
  */
 interface ProxyInterface {
 
     /**
-     * @return Object
+     * Returns Proxy structure
+     * @return Proxy
      */
     public function get();
 
+    /**
+     * Returns proxy url
+     * @return mixed
+     */
     public function getUrl();
 
 }

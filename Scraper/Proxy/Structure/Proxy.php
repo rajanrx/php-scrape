@@ -9,6 +9,10 @@
 namespace Scraper\Proxy\Structure;
 
 
+/**
+ * Class Proxy
+ * @package Scraper\Proxy\Structure
+ */
 class Proxy  implements ProxyInterface {
 
     /**
@@ -52,12 +56,17 @@ class Proxy  implements ProxyInterface {
     public $anonymity;
 
     /**
+     * {@inheritdoc}
      * @return $this
      */
     public function get() {
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     * @return string
+     */
     public function getUrl(){
         if($this->type == null){
             return $this->ip.':'.$this->port;

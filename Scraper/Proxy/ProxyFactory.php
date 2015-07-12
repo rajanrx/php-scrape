@@ -34,6 +34,7 @@ class ProxyFactory {
     }
 
     /**
+     * Returns Proxy object
      * @param ProxyGenerator $generator
      *
      * @return ProxyInterface[]
