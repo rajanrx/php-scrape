@@ -6,7 +6,7 @@
  * Time: 12:59 PM
  */
 
-namespace scraper\proxy\structure;
+namespace Scraper\Proxy\Structure;
 
 
 class Proxy  implements ProxyInterface {

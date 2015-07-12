@@ -6,10 +6,10 @@
  * Time: 12:48 PM
  */
 
-namespace scraper\scrape\extractor\types;
+namespace Scraper\Scrape\Extractor\Types;
 
 
-use scraper\scrape\extractor\BaseExtractor;
+use Scraper\Scrape\Extractor\BaseExtractor;
 
 /**
  * Class SingleRowExtractor
@@ -37,6 +37,8 @@ class SingleRowExtractor extends BaseExtractor {
             throw new \Exception('Single Extractor Error : Could not select root element');
         }
 
+
+
         foreach ($resultPipeLine as $pipeline) {
 
             if (isset($pipeline->configuration->xpaths)) {
@@ -48,6 +50,14 @@ class SingleRowExtractor extends BaseExtractor {
 
                     if (isset($configuration->type) && $configuration->type == 'HTML') {
                         $fields[$configuration->property] = $element->getOuterHtml();
+                    }
+
+                    if (isset($configuration->type) && $configuration->type == 'URL') {
+                        $fields[$configuration->property] =  $element->getAttribute('href');
+                        if (substr(trim($fields[$configuration->property]),0,1) == '/') {
+                            $parse = parse_url($this->crawler->currentUrl);
+                            $fields[$configuration->property] = $parse['scheme'].'://'.$parse['host'].$fields[$configuration->property];
+                        }
                     }
 
                     if(isset($configuration->regexp)){
@@ -89,7 +99,14 @@ class SingleRowExtractor extends BaseExtractor {
 
         $results = array();
         foreach($matches as $match){
+            if(empty($match[1])){
+                continue;
+            }
             $results[] = $match[1];
+        }
+
+        if(count($results) == 1){
+            return $results[0];
         }
 
         return $results;

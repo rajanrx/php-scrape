@@ -6,7 +6,7 @@
  * Time: 12:48 PM
  */
 
-namespace scraper\scrape\extractor\types;
+namespace Scraper\Scrape\Extractor\Types;
 
 
 /**

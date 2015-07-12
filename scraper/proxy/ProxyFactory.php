@@ -6,15 +6,13 @@
  * Time: 12:38 PM
  */
 
-namespace scraper\proxy;
-use scraper\proxy\generator\ProxyGenerator;
-use scraper\proxy\structure\ProxyInterface;
+namespace Scraper\Proxy;
+use Scraper\Proxy\Generator\ProxyGenerator;
+use Scraper\Proxy\Structure\ProxyInterface;
 
 /**
- * Class Proxy
- *
- *
- * @package app\models\proxy
+ * Class ProxyFactory
+ * @package scraper\proxy
  */
 class ProxyFactory {
     /**

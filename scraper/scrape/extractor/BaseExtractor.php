@@ -1,7 +1,7 @@
 <?php
 
-namespace scraper\scrape\extractor;
-use scraper\scrape\crawler\BaseCrawler;
+namespace Scraper\Scrape\Extractor;
+use Scraper\Scrape\Crawler\BaseCrawler;
 
 
 /**

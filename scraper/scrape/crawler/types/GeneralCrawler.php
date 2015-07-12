@@ -6,14 +6,14 @@
  * Time: 9:06 AM
  */
 
-namespace scraper\scrape\crawler\types;
+namespace Scraper\Scrape\Crawler\Types;
 
 
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Session;
 use Goutte\Client;
-use scraper\proxy\structure\Proxy;
-use scraper\scrape\crawler\BaseCrawler;
+use Scraper\Proxy\Structure\Proxy;
+use Scraper\Scrape\Crawler\BaseCrawler;
 
 
 /**

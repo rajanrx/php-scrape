@@ -6,7 +6,7 @@
  * Time: 12:42 PM
  */
 
-namespace scraper\proxy\generator;
+namespace Scraper\Proxy\Generator;
 
 abstract class ProxyGenerator {
 

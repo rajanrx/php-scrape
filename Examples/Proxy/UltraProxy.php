@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * Created by PhpStorm.
  * User: rajan
@@ -6,13 +8,10 @@
  * Time: 10:28 AM
  */
 
-namespace app\models\proxy\generator\sources;
-
-
-use app\models\crawl\crawler\types\GeneralCrawler;
-use app\models\crawl\extractor\types\MultipleRowExtractor;
-use app\models\proxy\generator\ProxyGenerator;
-use app\models\proxy\structure\Proxy;
+use Scraper\Proxy\Generator\ProxyGenerator;
+use Scraper\Proxy\Structure\Proxy;
+use Scraper\Scrape\Crawler\Types\GeneralCrawler;
+use Scraper\Scrape\Extractor\Types\MultipleRowExtractor;
 
 class UltraProxy extends ProxyGenerator{
 

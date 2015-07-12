@@ -6,7 +6,7 @@
  * Time: 12:50 PM
  */
 
-namespace scraper\proxy\structure;
+namespace Scraper\Proxy\Structure;
 
 
 /**
