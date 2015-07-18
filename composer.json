@@ -13,7 +13,6 @@
     "issues": "http://rajanr.info",
     "source": "https://github.com/rajanrx/php-scrape"
   },
-  "minimum-stability": "stable",
   "require": {
     "php": ">=5.4.0",
     "behat/mink": "~1.6",
