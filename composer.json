@@ -24,7 +24,7 @@
   "require-dev": {
     "jonnyw/php-phantomjs": "3.1.*",
     "php-curl-class/php-curl-class": "3.5.5",
-    "guzzlehttp/cache-subscriber": "0.1.*@dev"
+    "guzzlehttp/cache-subscriber": "0.1.0"
   },
   "config": {
     "process-timeout": 1800,
