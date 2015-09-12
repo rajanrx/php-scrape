@@ -33,7 +33,7 @@ class GeneralCrawler extends BaseCrawler{
         $session = $this->browser->getSession();
 
         // Do not reload the page if the page has been already loaded unless it is forced
-        if($session->getCurrentUrl() == $currentUrl && $forceReload == false){
+        if(count($this->pageHistory) > 1 && $session->getCurrentUrl() == $currentUrl && $forceReload == false){
             return $session->getPage();
         }
 
