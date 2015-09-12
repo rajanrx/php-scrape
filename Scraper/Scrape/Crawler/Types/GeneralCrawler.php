@@ -29,16 +29,11 @@ class GeneralCrawler extends BaseCrawler{
     public function getPage($forceReload = false) {
 
         $currentUrl = $this->currentUrl;
-        $sessionStarted = true;
-
-        if($this->browser->hasSession($this->browser->getDefaultSessionName())){
-            $sessionStarted = false;
-        }
 
         $session = $this->browser->getSession();
 
         // Do not reload the page if the page has been already loaded unless it is forced
-        if($sessionStarted && $session->getCurrentUrl() != $currentUrl && $forceReload = false){
+        if($session->getCurrentUrl() == $currentUrl && $forceReload == false){
             return $session->getPage();
         }
 

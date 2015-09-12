@@ -64,6 +64,22 @@ class MultipleRowExtractor extends SingleRowExtractor {
             if (!count($result)) {
                 continue;
             }
+
+            // Ignore duplicate rows caused by loading of the new records to the same page using ajax call
+            // Todo : this has to be replaced by deleting the recorded rows so that new records will always be there and hence no redundancy
+
+            $recordExists = false;
+            foreach ($results as $res) {
+                if ($res['hash'] == $result['hash']) {
+                    $recordExists = true;
+                    break;
+                }
+            }
+
+            if ($recordExists) {
+                continue;
+            }
+
             $results[] = $result;
         }
 
