@@ -13,7 +13,7 @@ namespace Scraper\Scrape\Extractor\Types;
  * Class MultipleRowExtractor
  * @package scraper\scrape\extractor\types
  */
-class MultipleRowExtractor extends SingleRowExtractor{
+class MultipleRowExtractor extends SingleRowExtractor {
 
     /**
      * @var null Stops crawling after matching hash
@@ -29,25 +29,39 @@ class MultipleRowExtractor extends SingleRowExtractor{
      */
     public function extract($rootElement = null) {
 
-        if($rootElement == null){
-            $rootElement = $this->crawler->getPage()->find('xpath', $this->rules->extraction->resultXPaths[0]);
+        $currentUrlNode = $this->crawler->getPage();
+
+        if ($rootElement == null) {
+            $rootElement = $currentUrlNode->find('xpath', $this->rules->extraction->resultXPaths[0]);
         }
 
-        if($rootElement == null){
+        // If javascript is enabled then sleep for a second so that the contents that might be loaded would be loaded properly
+        // todo : make 1 sec dynamic or check if dom is on ready state
+        if ($rootElement == null && $this->crawler->javaScriptRequired == true) {
+
+            $retryCount = 0;
+            while ($retryCount <= 3 || $rootElement == null) {
+                sleep(1);
+                $rootElement = $currentUrlNode->find('xpath', $this->rules->extraction->resultXPaths[0]);
+                $retryCount++;
+            }
+        }
+
+        if ($rootElement == null) {
             throw new \Exception('Multiple Extractor Error : Could not select root element');
         }
 
-        $rows = $rootElement->findAll('xpath',$this->rules->extraction->rowXPaths[0]);
+        $rows = $rootElement->findAll('xpath', $this->rules->extraction->rowXPaths[0]);
 
         $results = array();
 
-        foreach($rows as $row){
+        foreach ($rows as $row) {
             $result = parent::extract($row);
-            if($this->stopAtHash !=  null && $this->stopAtHash == $result['hash']){
+            if ($this->stopAtHash != null && $this->stopAtHash == $result['hash']) {
                 $this->crawler->maxPages = 1; // Forcefully break the crawling
                 break;
             }
-            if(!count($result)){
+            if (!count($result)) {
                 continue;
             }
             $results[] = $result;
