@@ -91,9 +91,12 @@ abstract class BaseCrawler {
 
     /**
      * Gets current page
+     *
+     * @param bool $forceReload
+     *
      * @return \Behat\Mink\Element\DocumentElement
      */
-    abstract public  function getPage();
+    abstract public  function getPage($forceReload = false);
 
     /**
      * Gets Next page if pagination selector is provided

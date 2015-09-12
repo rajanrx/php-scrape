@@ -26,14 +26,24 @@ class GeneralCrawler extends BaseCrawler{
      * {@inheritdoc}
      * @return \Behat\Mink\Element\DocumentElement
      */
-    public function getPage() {
+    public function getPage($forceReload = false) {
 
         $currentUrl = $this->currentUrl;
+        $sessionStarted = true;
+
+        if($this->browser->hasSession($this->browser->getDefaultSessionName())){
+            $sessionStarted = false;
+        }
 
         $session = $this->browser->getSession();
+
+        // Do not reload the page if the page has been already loaded unless it is forced
+        if($sessionStarted && $session->getCurrentUrl() != $currentUrl && $forceReload = false){
+            return $session->getPage();
+        }
+
         $session->visit($currentUrl);
         return $session->getPage();
-
     }
 
     /**
