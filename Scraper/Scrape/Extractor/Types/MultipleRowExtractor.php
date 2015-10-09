@@ -27,7 +27,7 @@ class MultipleRowExtractor extends SingleRowExtractor {
      * @return array
      * @throws \Exception
      */
-    public function extract($rootElement = null) {
+    public function extract($rootElement = null, $exitingRows = null) {
 
         $currentUrlNode = $this->crawler->getPage();
 
@@ -55,7 +55,12 @@ class MultipleRowExtractor extends SingleRowExtractor {
 
         $results = array();
 
+        $counter = 0;
         foreach ($rows as $row) {
+            if($exitingRows > 0 && $counter < $exitingRows && $this->crawler->javaScriptRequired){
+                $counter++;
+                continue;
+            }
             $result = parent::extract($row);
             if ($this->stopAtHash != null && $this->stopAtHash == $result['hash']) {
                 $this->crawler->maxPages = 1; // Forcefully break the crawling
@@ -81,6 +86,7 @@ class MultipleRowExtractor extends SingleRowExtractor {
             }
 
             $results[] = $result;
+            $counter++;
         }
 
         return $results;

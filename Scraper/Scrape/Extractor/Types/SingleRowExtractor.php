@@ -38,8 +38,6 @@ class SingleRowExtractor extends BaseExtractor {
             throw new \Exception('Single Extractor Error : Could not select root element');
         }
 
-
-
         foreach ($resultPipeLine as $pipeline) {
 
             if (isset($pipeline->configuration->xpaths)) {
