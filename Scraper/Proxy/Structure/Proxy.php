@@ -56,6 +56,11 @@ class Proxy  implements ProxyInterface {
     public $anonymity;
 
     /**
+     * @var String Url for the pac file
+     */
+    public $pacFile;
+
+    /**
      * {@inheritdoc}
      * @return $this
      */
