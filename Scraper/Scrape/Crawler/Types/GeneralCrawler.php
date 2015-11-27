@@ -33,15 +33,10 @@ class GeneralCrawler extends BaseCrawler {
 
         $session = $this->browser->getSession();
 
-        if($this->javaScriptRequired){
-            $this->browser->getSession()->wait(10000, '(0 === jQuery.active)');
-        }
-
         // Do not reload the page if the page has been already loaded unless it is forced
-        if ($session->getCurrentUrl() == $currentUrl && $forceReload == FALSE) {
+        if (count($this->pageHistory) > 1 && $session->getCurrentUrl() == $currentUrl && $forceReload == FALSE) {
             return $session->getPage();
         }
-
         $session->visit($currentUrl);
         return $session->getPage();
     }
