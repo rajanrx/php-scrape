@@ -61,14 +61,18 @@ class MultipleRowExtractor extends SingleRowExtractor {
                 $counter++;
                 continue;
             }
+
             $result = parent::extract($row);
+
+            if (!count($result)) {
+                continue;
+            }
+
             if ($this->stopAtHash != null && $this->stopAtHash == $result['hash']) {
                 $this->crawler->maxPages = 1; // Forcefully break the crawling
                 break;
             }
-            if (!count($result)) {
-                continue;
-            }
+
 
             // Ignore duplicate rows caused by loading of the new records to the same page using ajax call
             // Todo : this has to be replaced by deleting the recorded rows so that new records will always be there and hence no redundancy
