@@ -16,9 +16,11 @@ namespace Scraper\Scrape\Extractor\Types;
 class MultipleRowExtractor extends SingleRowExtractor {
 
     /**
-     * @var null Stops crawling after matching hash
+     * @var string[] Stops crawling after matching hash
      */
     public $stopAtHash = null;
+
+    public $minHashMatch = 1;
 
     /**
      * {@inheritdoc}
@@ -28,6 +30,11 @@ class MultipleRowExtractor extends SingleRowExtractor {
      * @throws \Exception
      */
     public function extract($rootElement = null, $exitingRows = null) {
+
+        // Make stopAtHash an array if it is not an array
+        if (!is_array($this->stopAtHash)) {
+            $this->stopAtHash = [$this->stopAtHash];
+        }
 
         $currentUrlNode = $this->crawler->getPage();
 
@@ -55,9 +62,10 @@ class MultipleRowExtractor extends SingleRowExtractor {
 
         $results = array();
 
-        $counter = 0;
+        $counter     = 0;
+        $hashMatched = 0;
         foreach ($rows as $row) {
-            if($exitingRows > 0 && $counter < $exitingRows && $this->crawler->javaScriptRequired){
+            if ($exitingRows > 0 && $counter < $exitingRows && $this->crawler->javaScriptRequired) {
                 $counter++;
                 continue;
             }
@@ -68,9 +76,13 @@ class MultipleRowExtractor extends SingleRowExtractor {
                 continue;
             }
 
-            if ($this->stopAtHash != null && $this->stopAtHash == $result['hash']) {
-                $this->crawler->maxPages = 1; // Forcefully break the crawling
-                break;
+            if ($this->stopAtHash != null && in_array($result['hash'], $this->stopAtHash)) {
+                $hashMatched++;
+                if ($hashMatched >= $this->minHashMatch) {
+                    $this->crawler->maxPages = 1; // Forcefully break the crawling
+                    break;
+                }
+                continue;
             }
 
 
