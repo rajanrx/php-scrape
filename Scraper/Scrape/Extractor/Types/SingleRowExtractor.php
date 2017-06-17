@@ -3,6 +3,9 @@
 namespace Scraper\Scrape\Extractor\Types;
 
 use Scraper\Scrape\Extractor\BaseExtractor;
+use Scraper\Structure\DateField;
+use Scraper\Structure\HtmlField;
+use Scraper\Structure\RegexField;
 
 /**
  * Class SingleRowExtractor
@@ -25,12 +28,11 @@ class SingleRowExtractor extends BaseExtractor
     {
 
         $fields = [];
-        $resultPipeLine = $this->rules->extraction->resultPipeline;
 
         if ($rootElement == null) {
             $rootElement = $this->crawler->getPage()->find(
                 'xpath',
-                $this->rules->extraction->resultXPaths[0]
+                $this->configuration->getTargetXPath()
             );
         }
 
@@ -40,56 +42,48 @@ class SingleRowExtractor extends BaseExtractor
             );
         }
 
-        foreach ($resultPipeLine as $pipeline) {
-            if (isset($pipeline->configuration->xpaths)) {
-                $element = $rootElement->find(
-                    'xpath',
-                    $pipeline->configuration->xpaths[0]
-                );
+        foreach ($this->configuration->getFields() as $field) {
+            if (isset($field->xpath)) {
+                $element = $rootElement->find('xpath', $field->xpath);
                 if ($element != null) {
-                    $configuration = $pipeline->configuration;
-                    $fields[$configuration->property] = $element->getText();
+                    $fields[$field->name] = $element->getText();
 
-                    if (isset($configuration->type) &&
-                        $configuration->type == 'HTML'
-                    ) {
-                        $fields[$configuration->property] =
+                    if ($field instanceof HtmlField) {
+                        $fields[$field->name] =
                             $element->getOuterHtml();
                     }
 
-                    if (isset($configuration->type) &&
-                        $configuration->type == 'URL'
-                    ) {
-                        $fields[$configuration->property] =
-                            $element->getAttribute('href');
-                        if (substr(
-                            trim($fields[$configuration->property]),
-                            0,
-                            1
-                        ) == '/'
-                        ) {
-                            $parse = parse_url($this->crawler->currentUrl);
-                            $fields[$configuration->property] =
-                                $parse['scheme'] .
-                                '://' .
-                                $parse['host'] .
-                                $fields[$configuration->property];
+                    if (isset($field->property)) {
+                        $fields[$field->name] =
+                            $element->getAttribute($field->property);
+                        if ($field->property == 'href') {
+                            if (substr(
+                                    trim($fields[$field->name]),
+                                    0,
+                                    1
+                                ) == '/'
+                            ) {
+                                $parse = parse_url($this->crawler->currentUrl);
+                                $fields[$field->name] =
+                                    $parse['scheme'] .
+                                    '://' .
+                                    $parse['host'] .
+                                    $fields[$field->name];
+                            }
                         }
                     }
 
-                    if (isset($configuration->regexp)) {
-                        $fields[$configuration->property] = $this->parseRegex(
-                            $fields[$configuration->property],
-                            $configuration->regexp
+                    if ($field instanceof RegexField) {
+                        $fields[$field->name] = $this->parseRegex(
+                            $fields[$field->name],
+                            $field->regex
                         );
                     }
 
-                    if (isset($configuration->type) &&
-                        $configuration->type == 'DATE'
-                    ) {
-                        $fields[$configuration->property] = date(
-                            "Y-m-d h:i:s",
-                            strtotime($fields[$configuration->property])
+                    if ($field instanceof DateField) {
+                        $fields[$field->name] = date(
+                            $field->format,
+                            strtotime($fields[$field->name])
                         );
                     }
                 }
@@ -113,7 +107,6 @@ class SingleRowExtractor extends BaseExtractor
      */
     private function parseRegex($string, $regex)
     {
-
         preg_match_all($regex, $string, $matches, PREG_SET_ORDER);
 
         if (!count($matches)) {

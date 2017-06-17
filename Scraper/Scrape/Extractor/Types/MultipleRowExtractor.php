@@ -38,7 +38,7 @@ class MultipleRowExtractor extends SingleRowExtractor
         if ($rootElement == null) {
             $rootElement = $currentUrlNode->find(
                 'xpath',
-                $this->rules->extraction->resultXPaths[0]
+                $this->configuration->getTargetXPath()
             );
         }
 
@@ -53,7 +53,7 @@ class MultipleRowExtractor extends SingleRowExtractor
                 sleep(1);
                 $rootElement = $currentUrlNode->find(
                     'xpath',
-                    $this->rules->extraction->resultXPaths[0]
+                    $this->configuration->getTargetXPath()
                 );
                 $retryCount++;
             }
@@ -67,7 +67,7 @@ class MultipleRowExtractor extends SingleRowExtractor
 
         $rows = $rootElement->findAll(
             'xpath',
-            $this->rules->extraction->rowXPaths[0]
+            $this->configuration->getRowXPath()
         );
 
         $results = [];

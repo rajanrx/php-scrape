@@ -1,54 +1,43 @@
 {
-  "version": 4,
-  "extraction": {
-    "resultPipeline": [
-      {
-        "configuration": {
-          "property": "repo_name",
-          "xpaths": [
-            ".//div[1]/h3/a"
-          ]
+    "browserType": null,
+    "targetXPath": "\/\/div[@class=\"explore-content\"]",
+    "targetCssPath": null,
+    "rowXPath": "\/\/*[contains(@class,\"repo-list\")]\/li",
+    "rowCssPath": null,
+    "fields": [
+        {
+            "name": "repo_name",
+            "xpath": ".\/\/div[1]\/h3\/a",
+            "cssPath": null,
+            "canBeEmpty": false,
+            "property": null,
+            "phpClass": "Scraper\\Structure\\TextField"
+        },
+        {
+            "name": "repo_url",
+            "xpath": ".\/\/div[1]\/h3\/a",
+            "cssPath": null,
+            "canBeEmpty": false,
+            "property": "href",
+            "phpClass": "Scraper\\Structure\\TextField"
+        },
+        {
+            "name": "description",
+            "xpath": ".\/\/div[@class=\"py-1\"]\/p",
+            "cssPath": null,
+            "canBeEmpty": true,
+            "property": null,
+            "phpClass": "Scraper\\Structure\\TextField"
+        },
+        {
+            "regex": "\/(\\d*)\\s[stars]\/",
+            "name": "stars_today",
+            "xpath": ".\/\/div[4]\/span[@class=\"float-right\"]",
+            "cssPath": null,
+            "canBeEmpty": false,
+            "property": null,
+            "phpClass": "Scraper\\Structure\\RegexField"
         }
-      },
-      {
-        "configuration": {
-          "property": "repo_url",
-          "type": "URL",
-          "xpaths": [
-            ".//div[1]/h3/a"
-          ]
-        }
-      },
-      {
-        "configuration": {
-          "property": "description",
-          "xpaths": [
-            ".//div[@class=\"py-1\"]/p"
-          ]
-        }
-      },
-      {
-        "configuration": {
-          "property": "stars_today",
-          "xpaths": [
-            ".//div[4]/span[@class=\"float-right\"]"
-          ],
-          "regexp": "/(\\d*)\\s[stars]/"
-        }
-      }
     ],
-    "resultXPaths": [
-      "//div[@class=\"explore-content\"]"
-    ],
-    "rowXPaths":[
-      "//*[contains(@class,\"repo-list\")]/li"
-    ]
-  },
-  "urlProperties": [
-    "repo_url"
-  ],
-  "playback": {
-    "url": "${webpage/url}",
-    "fixHtml": true
-  }
+    "phpClass": "Scraper\\Structure\\Configuration"
 }

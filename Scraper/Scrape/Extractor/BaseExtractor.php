@@ -3,6 +3,7 @@
 namespace Scraper\Scrape\Extractor;
 
 use Scraper\Scrape\Crawler\BaseCrawler;
+use Scraper\Structure\Configuration;
 
 /**
  * Abstract class for extractor
@@ -20,29 +21,22 @@ abstract class BaseExtractor
     public $crawler;
 
     /**
-     * @var String Json file defining rules for extracting data
+     * @var Configuration Configuration for extracting data
      */
-    public $rules;
+    public $configuration;
 
     /**
      * Initialises extractor
      *
-     * @param BaseCrawler $crawler
-     * @param String      $rulePath
-     *
+     * @param BaseCrawler   $crawler
+     * @param Configuration $configuration
      * @throws \Exception
+     *
      */
-    public function __construct(BaseCrawler $crawler, $rulePath)
+    public function __construct(BaseCrawler $crawler, Configuration $configuration)
     {
         $this->crawler = $crawler;
-
-        $rules = file_get_contents($rulePath);
-
-        if ($rules === false) {
-            throw new \Exception("Extractor Error : Invalid rule path ");
-        }
-
-        $this->rules = json_decode($rules);
+        $this->configuration = $configuration;
     }
 
     /**

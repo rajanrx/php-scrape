@@ -6,7 +6,7 @@ use Scraper\Structure\TextField;
 require_once(__DIR__ . '/../vendor/autoload.php');
 
 $configurationManager = \Scraper\Scrape\ConfigurationManager::getInstance(
-    __DIR__ . '/Data/test.json'
+    __DIR__ . '/Data/git-repo.json'
 );
 $configuration = $configurationManager->getOrCreateConfiguration();
 $configuration->setTargetXPath('//div[@class="explore-content"]');
@@ -36,7 +36,8 @@ $configuration->setFields(
         new RegexField(
             [
                 'name' => 'stars_today',
-                'xpath' => './/div[4]/span[@class="float-right"]'
+                'xpath' => './/div[4]/span[@class="float-right"]',
+                'regex' => '/(\\d*)\\s[stars]/'
             ]
         ),
     ]

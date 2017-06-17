@@ -35,7 +35,7 @@ class Configuration
     }
 
     /**
-     * @return array
+     * @return Field[]
      */
     public function getFields()
     {
