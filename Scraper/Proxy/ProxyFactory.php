@@ -1,20 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rajan
- * Date: 22/06/15
- * Time: 12:38 PM
- */
 
 namespace Scraper\Proxy;
+
 use Scraper\Proxy\Generator\ProxyGenerator;
 use Scraper\Proxy\Structure\ProxyInterface;
 
 /**
  * Class ProxyFactory
+ *
  * @package scraper\proxy
  */
-class ProxyFactory {
+class ProxyFactory
+{
     /**
      * @var ProxyFactory reference to singleton instance
      */
@@ -25,7 +22,8 @@ class ProxyFactory {
      *
      * @return ProxyFactory
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (null === static::$instance) {
             static::$instance = new static;
         }
@@ -35,14 +33,16 @@ class ProxyFactory {
 
     /**
      * Returns Proxy object
+     *
      * @param ProxyGenerator $generator
      *
      * @return ProxyInterface[]
      * @throws \Exception
      */
-    public function getProxy(ProxyGenerator $generator){
+    public function getProxy(ProxyGenerator $generator)
+    {
 
-        if(!is_a($generator,ProxyGenerator::className())){
+        if (!is_a($generator, ProxyGenerator::className())) {
             throw new \Exception("Provided generator is not of type ProxyGenerator");
         }
 
@@ -51,9 +51,9 @@ class ProxyFactory {
 
     /**
      * is not allowed to call from outside: private!
-     *
      */
-    private function __construct() {
+    private function __construct()
+    {
     }
 
     /**
@@ -61,7 +61,8 @@ class ProxyFactory {
      *
      * @return void
      */
-    private function __clone() {
+    private function __clone()
+    {
     }
 
     /**
@@ -69,7 +70,7 @@ class ProxyFactory {
      *
      * @return void
      */
-    private function __wakeup() {
+    private function __wakeup()
+    {
     }
-
 }

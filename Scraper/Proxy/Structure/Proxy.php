@@ -8,12 +8,13 @@
 
 namespace Scraper\Proxy\Structure;
 
-
 /**
  * Class Proxy
+ *
  * @package Scraper\Proxy\Structure
  */
-class Proxy  implements ProxyInterface {
+class Proxy implements ProxyInterface
+{
 
     /**
      * @var String Ip address
@@ -62,18 +63,22 @@ class Proxy  implements ProxyInterface {
 
     /**
      * {@inheritdoc}
+     *
      * @return $this
      */
-    public function get() {
+    public function get()
+    {
         return $this;
     }
 
     /**
      * {@inheritdoc}
+     *
      * @return string
      */
-    public function getUrl(){
-        if($this->type == null){
+    public function getUrl()
+    {
+        if ($this->type == null) {
             return $this->ip.':'.$this->port;
         }
         return strtolower($this->type).'://'.$this->ip.':'.$this->port;

@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rajan
- * Date: 23/06/15
- * Time: 8:21 AM
- */
 
 namespace Scraper\Scrape\Crawler;
-
 
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Driver\Selenium2Driver;
@@ -20,9 +13,11 @@ use Scraper\Proxy\Structure\Proxy;
 
 /**
  * Class BaseCrawler
+ *
  * @package scraper\scrape\crawler
  */
-abstract class BaseCrawler {
+abstract class BaseCrawler
+{
 
     /**
      * @var null Current url of the website
@@ -53,19 +48,26 @@ abstract class BaseCrawler {
     /**
      * @var array History of url being crawled
      */
-    protected $pageHistory = array();
+    protected $pageHistory = [];
 
     /**
      * Initialize crawler
-     * Setting Javascript enabled to true automatically selects Selenium2 as a default web browser driver
-     * @param $currentUrl
-     * @param null $nextPageSelector
-     * @param bool $javaScriptRequired
+     * Setting Javascript enabled to true automatically selects Selenium2 as a
+     * default web browser driver
+     *
+     * @param         $currentUrl
+     * @param null    $nextPageSelector
+     * @param bool    $javaScriptRequired
      * @param Session $driver
      */
-    function __construct($currentUrl, $nextPageSelector = null, $javaScriptRequired = false , Session $driver = null) {
-        $this->currentUrl         = $currentUrl;
-        $this->nextPageSelector   = $nextPageSelector;
+    public function __construct(
+        $currentUrl,
+        $nextPageSelector = null,
+        $javaScriptRequired = false,
+        Session $driver = null
+    ) {
+        $this->currentUrl = $currentUrl;
+        $this->nextPageSelector = $nextPageSelector;
         $this->javaScriptRequired = $javaScriptRequired;
 
         $this->setBrowser($driver);
@@ -74,19 +76,23 @@ abstract class BaseCrawler {
 
     /**
      * Return class name
+     *
      * @return string
      */
-    public static function className(){
+    public static function className()
+    {
         return get_called_class();
     }
 
     /**
      * Sets relay network ahead of the url. Useful when using TOR Relay networks
+     *
      * @param $relayNetwork
      */
-    public function setRelayNetwork($relayNetwork){
+    public function setRelayNetwork($relayNetwork)
+    {
 
-        $this->currentUrl  = $relayNetwork.$this->currentUrl;
+        $this->currentUrl = $relayNetwork . $this->currentUrl;
     }
 
     /**
@@ -96,18 +102,20 @@ abstract class BaseCrawler {
      *
      * @return \Behat\Mink\Element\DocumentElement
      */
-    abstract public  function getPage($forceReload = false);
+    abstract public function getPage($forceReload = false);
 
     /**
      * Gets Next page if pagination selector is provided
+     *
      * @param null $nextPageSelector
      *
      * @return mixed
      */
-    abstract public function  getNextPage($nextPageSelector = null);
+    abstract public function getNextPage($nextPageSelector = null);
 
     /**
      * Sets next page using provided selector
+     *
      * @param null $nextPageSelector
      *
      * @return mixed
@@ -116,6 +124,7 @@ abstract class BaseCrawler {
 
     /**
      * Sets Proxy in the browser driver to allow anonymous scraping
+     *
      * @param Proxy $proxy
      *
      * @return mixed
@@ -124,6 +133,7 @@ abstract class BaseCrawler {
 
     /**
      * Return visited page history
+     *
      * @return mixed
      */
     abstract public function getPageHistory();
@@ -131,63 +141,82 @@ abstract class BaseCrawler {
     /**
      * Sets page history
      */
-    protected function setPageHistory(){
+    protected function setPageHistory()
+    {
         $this->pageHistory[] = [
-            'url' => $this->currentUrl
+            'url' => $this->currentUrl,
         ];
     }
 
     /**
      * Checks if next page selector is enabled
-     * Not implemented properly yet. Default is false which means the next page selector is enabled all the time
+     * Not implemented properly yet. Default is false which means the next page
+     * selector is enabled all the time
+     *
      * @param Element $element
      *
      * @return bool
      */
-    protected function checkEnabled(Element $element){
+    protected function checkEnabled(Element $element)
+    {
 
         return false;
     }
 
     /**
-     * Sets the browser driver depending on the javascript select parameter or injected browser driver
+     * Sets the browser driver depending on the javascript select parameter or
+     * injected browser driver
+     *
      * @param Session $driver
      */
-    private function setBrowser(Session $driver = null){
+    private function setBrowser(Session $driver = null)
+    {
 
-        if($driver != null){
-
-            $this->browser = new Mink([
-                'custom' => $driver
-            ]);
+        if ($driver != null) {
+            $this->browser = new Mink(
+                [
+                    'custom' => $driver,
+                ]
+            );
 
             $this->browser->setDefaultSessionName('custom');
+
             return;
         }
 
         $client = new Client();
         $guzzle = $client->getClient();
-        CacheSubscriber::attach($guzzle,[
-            //'storage' => new CacheStorage(new FilesystemCache('/tmp/crawlCache')),
-            //'validate' => false,
-        ]);
+        CacheSubscriber::attach(
+            $guzzle,
+            [
+                //'storage' => new CacheStorage(new FilesystemCache('/tmp/crawlCache')),
+                //'validate' => false,
+            ]
+        );
 
         $client->setClient($guzzle);
 
         // init Mink and register sessions
-        $this->browser = new Mink([
-            'goutte'    => new Session(new GoutteDriver($client)),
-            'selenium2' => new Session(new Selenium2Driver('firefox',[
-                "permissions.default.image" => 2
-            ])),
-        ]);
+        $this->browser = new Mink(
+            [
+                'goutte'    => new Session(new GoutteDriver($client)),
+                'selenium2' => new Session(
+                    new Selenium2Driver(
+                        'firefox',
+                        [
+                            "permissions.default.image" => 2,
+                        ]
+                    )
+                ),
+            ]
+        );
 
-        if(!$this->javaScriptRequired){
+        if (!$this->javaScriptRequired) {
             $this->browser->setDefaultSessionName('goutte');
+
             return;
         }
 
         $this->browser->setDefaultSessionName('selenium2');
-
     }
 }

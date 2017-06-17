@@ -24,7 +24,8 @@
     "guzzlehttp/cache-subscriber": "0.1.0"
   },
   "require-dev": {
-    "jonnyw/php-phantomjs": "3.1.*"
+    "jonnyw/php-phantomjs": "3.1.*",
+    "squizlabs/php_codesniffer": "3.*"
   },
   "config": {
     "process-timeout": 1800,
