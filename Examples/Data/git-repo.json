@@ -6,7 +6,7 @@
         "configuration": {
           "property": "repo_name",
           "xpaths": [
-            ".//h3[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" repo-list-name \")]/a[1][not(@id)][not(@class)][not(@style)]"
+            ".//div[1]/h3/a"
           ]
         }
       },
@@ -15,7 +15,7 @@
           "property": "repo_url",
           "type": "URL",
           "xpaths": [
-            ".//h3[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" repo-list-name \")]/a[1][not(@id)][not(@class)][not(@style)]"
+            ".//div[1]/h3/a"
           ]
         }
       },
@@ -23,7 +23,7 @@
         "configuration": {
           "property": "description",
           "xpaths": [
-            ".//p[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" repo-list-description \")]"
+            ".//div[@class=\"py-1\"]/p"
           ]
         }
       },
@@ -31,7 +31,7 @@
         "configuration": {
           "property": "stars_today",
           "xpaths": [
-            ".//p[not(@id)][not(@style)][contains(concat(' ',normalize-space(@class),' '),\" repo-list-meta \")]"
+            ".//div[4]/span[@class=\"float-right\"]"
           ],
           "regexp": "/(\\d*)\\s[stars]/"
         }
@@ -41,7 +41,7 @@
       "//div[@class=\"explore-content\"]"
     ],
     "rowXPaths":[
-      "//*[contains(@class,\"repo-list-item\")]"
+      "//*[contains(@class,\"repo-list\")]/li"
     ]
   },
   "urlProperties": [
