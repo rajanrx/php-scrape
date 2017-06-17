@@ -5,7 +5,7 @@ namespace Scraper\Structure;
 
 use Scraper\Traits\SerializableTrait;
 
-abstract class Field extends Configuration
+abstract class Field
 {
     use SerializableTrait;
 
@@ -22,7 +22,7 @@ abstract class Field extends Configuration
     public function setAttributes($array = [])
     {
         foreach ($array as $key => $value) {
-            if (property_exists($this, $key)) {
+            if (property_exists($this, $key) && $value != null) {
                 $this->$key = $value;
             }
         }

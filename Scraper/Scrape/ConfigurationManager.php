@@ -10,10 +10,10 @@ class ConfigurationManager
     private static $instance;
 
     /** @var  string */
-    private $fileName;
+    protected $fileName;
 
     /** @var  Configuration */
-    public $configuration;
+    protected $configuration;
 
     public static function getInstance($fileName)
     {
@@ -27,7 +27,7 @@ class ConfigurationManager
         return static::$instance;
     }
 
-    protected function getConfiguration()
+    public function getConfiguration()
     {
         $config = file_get_contents($this->fileName);
         if ($config === false) {
@@ -35,17 +35,13 @@ class ConfigurationManager
                 'Unable to open file ' . $this->fileName
             );
         }
-        if (!$this->isJson($config)) {
-            throw new \Exception('Invalid JSON file provided');
-        }
-        $array = json_decode($config, true);
-        $this->configuration = new Configuration();
-        $this->configuration->constructFromArray($array);
+
+        $this->configuration = Configuration::getObjectFromJson($config);
 
         return $this->configuration;
     }
 
-    protected function createConfiguration()
+    public function createConfiguration()
     {
         // Create empty file
         file_put_contents($this->fileName, '{}');
@@ -65,19 +61,12 @@ class ConfigurationManager
     public function save()
     {
         return file_put_contents(
-            self::$instance->fileName,
+            $this->fileName,
             json_encode(
-                self::$instance->configuration->toArray(),
+                $this->configuration->toArray(),
                 JSON_PRETTY_PRINT
             )
         );
-    }
-
-    protected function isJson($str)
-    {
-        $json = json_decode($str);
-
-        return $json && $str != $json;
     }
 
     /**
@@ -85,6 +74,14 @@ class ConfigurationManager
      */
     private function __construct()
     {
+    }
+
+    /**
+     * @param Configuration $configuration
+     */
+    public function setConfiguration($configuration)
+    {
+        $this->configuration = $configuration;
     }
 
     /**

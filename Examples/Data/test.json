@@ -1,0 +1,39 @@
+{
+    "browserType": null,
+    "targetXPath": "\/\/div[@class=\"explore-content\"]",
+    "targetCssPath": null,
+    "rowXPath": "\/\/*[contains(@class,\"repo-list\")]\/li",
+    "rowCssPath": null,
+    "fields": [
+        {
+            "name": "repo_name",
+            "xpath": null,
+            "cssPath": null,
+            "canBeEmpty": false,
+            "phpClass": "Scraper\\Structure\\TextField"
+        },
+        {
+            "name": "repo_url",
+            "xpath": null,
+            "cssPath": null,
+            "canBeEmpty": false,
+            "phpClass": "Scraper\\Structure\\TextField"
+        },
+        {
+            "name": "description",
+            "xpath": null,
+            "cssPath": null,
+            "canBeEmpty": true,
+            "phpClass": "Scraper\\Structure\\TextField"
+        },
+        {
+            "regex": null,
+            "name": "stars_today",
+            "xpath": null,
+            "cssPath": null,
+            "canBeEmpty": false,
+            "phpClass": "Scraper\\Structure\\RegexField"
+        }
+    ],
+    "phpClass": "Scraper\\Structure\\Configuration"
+}
