@@ -7,31 +7,35 @@
     "fields": [
         {
             "name": "repo_name",
-            "xpath": null,
+            "xpath": ".\/\/div[1]\/h3\/a",
             "cssPath": null,
             "canBeEmpty": false,
+            "property": null,
             "phpClass": "Scraper\\Structure\\TextField"
         },
         {
             "name": "repo_url",
-            "xpath": null,
+            "xpath": ".\/\/div[1]\/h3\/a",
             "cssPath": null,
             "canBeEmpty": false,
+            "property": "href",
             "phpClass": "Scraper\\Structure\\TextField"
         },
         {
             "name": "description",
-            "xpath": null,
+            "xpath": ".\/\/div[@class=\"py-1\"]\/p",
             "cssPath": null,
             "canBeEmpty": true,
+            "property": null,
             "phpClass": "Scraper\\Structure\\TextField"
         },
         {
             "regex": null,
             "name": "stars_today",
-            "xpath": null,
+            "xpath": ".\/\/div[4]\/span[@class=\"float-right\"]",
             "cssPath": null,
             "canBeEmpty": false,
+            "property": null,
             "phpClass": "Scraper\\Structure\\RegexField"
         }
     ],

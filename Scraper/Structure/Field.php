@@ -13,6 +13,7 @@ abstract class Field
     public $xpath;
     public $cssPath;
     public $canBeEmpty = false;
+    public $property;
 
     public function __construct($props = [])
     {
