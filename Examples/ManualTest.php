@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 $configurationManager = \Scraper\Scrape\ConfigurationManager::getInstance(
     __DIR__ . '/Data/test.json'
 );
-$configuration = $configurationManager->getConfiguration();
+$configuration = $configurationManager->getOrCreateConfiguration();
 $configuration->setTargetXPath('//div[@class="explore-content"]');
 $configuration->setRowXPath('//*[contains(@class,"repo-list")]/li');
 $configuration->setFields(

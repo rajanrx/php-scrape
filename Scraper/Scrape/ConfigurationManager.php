@@ -43,8 +43,11 @@ class ConfigurationManager
 
     public function createConfiguration()
     {
-        // Create empty file
-        file_put_contents($this->fileName, '{}');
+        $configuration = new Configuration();
+        file_put_contents(
+            $this->fileName,
+            json_encode($configuration->toArray(), JSON_PRETTY_PRINT)
+        );
 
         return $this->getConfiguration();
     }
