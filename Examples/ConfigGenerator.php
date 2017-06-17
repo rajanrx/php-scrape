@@ -42,7 +42,7 @@ $configuration->setFields(
         ),
     ]
 );
-$configurationManager->save();
+$configurationManager->save($configuration);
 print_r($configurationManager->getConfiguration());
 
 

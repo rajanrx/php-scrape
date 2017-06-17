@@ -61,12 +61,13 @@ class ConfigurationManager
         return $this->createConfiguration();
     }
 
-    public function save()
+    public function save(Configuration $configuration = null)
     {
+        $configuration = $configuration ?: $this->configuration;
         return file_put_contents(
             $this->fileName,
             json_encode(
-                $this->configuration->toArray(),
+                $configuration->toArray(),
                 JSON_PRETTY_PRINT
             )
         );
