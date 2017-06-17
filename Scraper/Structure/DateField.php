@@ -3,7 +3,6 @@
 
 namespace Scraper\Structure;
 
-
 class DateField extends Field
 {
 

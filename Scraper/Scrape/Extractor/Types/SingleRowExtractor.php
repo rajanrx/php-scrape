@@ -57,11 +57,7 @@ class SingleRowExtractor extends BaseExtractor
                         $fields[$field->name] =
                             $element->getAttribute($field->property);
                         if ($field->property == 'href') {
-                            if (substr(
-                                    trim($fields[$field->name]),
-                                    0,
-                                    1
-                                ) == '/'
+                            if (substr(trim($fields[$field->name]), 0, 1) == '/'
                             ) {
                                 $parse = parse_url($this->crawler->currentUrl);
                                 $fields[$field->name] =

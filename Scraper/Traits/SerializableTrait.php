@@ -2,7 +2,6 @@
 
 namespace Scraper\Traits;
 
-
 trait SerializableTrait
 {
     public function toArray()
