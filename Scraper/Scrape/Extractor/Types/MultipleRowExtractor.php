@@ -4,7 +4,6 @@ namespace Scraper\Scrape\Extractor\Types;
 
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
-use Twig\Node\Node;
 
 /**
  * Class MultipleRowExtractor
@@ -161,8 +160,9 @@ class MultipleRowExtractor extends SingleRowExtractor
             }
 
             if ($this->checkShouldHalt($result, $hashMatched)) {
+                // Todo: remove max page hack
                 $this->crawler->maxPages = 1; // Forcefully break the crawling
-                break;
+                return $results;
             }
 
             $recordExists = $this->checkIfRecordExists($results, $result);
