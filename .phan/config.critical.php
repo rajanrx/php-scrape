@@ -14,7 +14,6 @@ return [
         'Scraper',
         'Tests',
         'Examples',
-        'vendor',
     ],
 
     // A directory list that defines files that will be excluded
