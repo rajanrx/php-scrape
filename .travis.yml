@@ -22,5 +22,6 @@ script:
   - ./bin/phpcs -p
   - ./bin/phpmd --exclude '*Test.php,*TestCase.php' ./Scraper/ text codesize
   # Phan has minimum dependency of PHP 7.1
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then ./travis/phan.sh; fi
+  #- if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.1" ]]; then ./travis/phan.sh; fi
+  - ./travis/phpsa.sh
   - ./bin/concise
