@@ -10,7 +10,7 @@ echo "extension=ast.so" >> $HOME/.phpenv/versions/$(phpenv version-name)/etc/php
 cd $TRAVIS_BUILD_DIR
 
 # Install phan
-composer global require etsy/phan=0.9.1
+composer global require etsy/phan=0.9.2
 
 # Run phan check
 time $HOME/.composer/vendor/bin/phan -pqj 1
