@@ -19,5 +19,5 @@ before_install:
   - composer install
 
 script:
-  - ./config/part/phplint.sh
+  - ./vendor/squizlabs/php_codesniffer/bin/phpcs -p
   - ./config/part/phpunit.sh
