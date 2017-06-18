@@ -14,7 +14,7 @@
     "source": "https://github.com/rajanrx/php-scrape"
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.0",
     "behat/mink": "~1.6",
     "behat/mink-browserkit-driver": "~1.2",
     "behat/mink-goutte-driver": "~1.1",
