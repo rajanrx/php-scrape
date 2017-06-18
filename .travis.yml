@@ -17,6 +17,9 @@ cache:
 # Don't run the default Travis PHP install step
 install: true
 
+before_install:
+  - composer install
+
 script:
   - ./config/part/phplint.sh
   - ./config/part/phpunit.sh
