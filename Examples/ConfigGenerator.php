@@ -37,7 +37,7 @@ $configuration->setFields(
             [
                 'name' => 'stars_today',
                 'xpath' => './/div[4]/span[@class="float-right"]',
-                'regex' => '/(\\d*)\\s[stars]/'
+                'regex' => '/(\d*)\s[stars]/'
             ]
         ),
     ]

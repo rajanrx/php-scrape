@@ -20,4 +20,4 @@ before_install:
 
 script:
   - ./bin/phpcs -p
-  - ./config/part/phpunit.sh
+  - ./bin/concise

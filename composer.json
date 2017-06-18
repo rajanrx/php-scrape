@@ -47,7 +47,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Scraper\\": "Scraper"
+      "Scraper\\": "Scraper",
+      "Tests\\": "Tests"
     }
   }
 }

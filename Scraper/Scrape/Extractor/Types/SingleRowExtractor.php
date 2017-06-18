@@ -14,8 +14,6 @@ use Scraper\Structure\RegexField;
  */
 class SingleRowExtractor extends BaseExtractor
 {
-
-
     /**
      * {@inheritdoc}
      *
