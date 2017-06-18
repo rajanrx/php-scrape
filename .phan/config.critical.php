@@ -14,6 +14,9 @@ return [
         'Scraper',
         'Tests',
         'Examples',
+        'vendor/behat',
+        'vendor/elliotchance',
+        'vendor/phpunit'
     ],
 
     // A directory list that defines files that will be excluded
