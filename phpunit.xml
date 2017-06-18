@@ -19,10 +19,16 @@
         timeoutForLargeTests="120"
         beStrictAboutTestSize="false"
         beStrictAboutTestsThatDoNotTestAnything="true"
-        >
+>
     <testsuites>
         <testsuite name="unit">
             <directory>Tests/Unit</directory>
         </testsuite>
     </testsuites>
+    <filter>
+         <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">Scraper</directory>
+            <file>Scraper/**</file>
+         </whitelist>
+    </filter>
 </phpunit>
