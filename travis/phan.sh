@@ -13,4 +13,4 @@ cd $TRAVIS_BUILD_DIR
 composer global require etsy/phan=0.9.1
 
 # Run phan check
-time $HOME/.composer/vendor/bin/phan -pqj 4
+time $HOME/.composer/vendor/bin/phan -pqj 1
