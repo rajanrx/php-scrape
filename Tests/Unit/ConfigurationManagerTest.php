@@ -84,6 +84,8 @@ class ConfigurationManagerTest extends TestCase
             ]
         );
         $this->configurationManager->save();
+        $data = $this->getJsonData();
+        $this->assertEquals(4, count($data->fields));
         $this->assertEquals(
             file_get_contents(self::$dir . '/git-repo.json'),
             file_get_contents(self::$dir . '/configuration.json')

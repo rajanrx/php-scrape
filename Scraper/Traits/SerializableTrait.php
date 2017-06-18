@@ -38,16 +38,7 @@ trait SerializableTrait
         if (is_scalar($element)) {
             throw new \Exception('Provided element is scalar');
         }
-        $object = [];
-        if (is_array($element) && array_key_exists('phpClass', $element)) {
-            $class = $element['phpClass'];
-            $object = new $class();
-        } else {
-            if (is_object($element) && property_exists($element, 'phpClass')) {
-                $class = $element->phpClass;
-                $object = new $class();
-            }
-        }
+        $object = self::getObject($element);
 
         foreach ($element as $key => $value) {
             if ($value != null && !is_scalar($value)) {
@@ -69,5 +60,27 @@ trait SerializableTrait
         $json = json_decode($str);
 
         return $json && $str != $json;
+    }
+
+
+    /**
+     * @param $element
+     * @return array
+     */
+    protected static function getObject($element)
+    {
+        $object = [];
+        if (is_array($element) && array_key_exists('phpClass', $element)) {
+            $class = $element['phpClass'];
+            $object = new $class();
+        } else {
+            if (is_object($element) && property_exists($element, 'phpClass')) {
+                /** @noinspection PhpUndefinedFieldInspection */
+                $class = $element->phpClass;
+                $object = new $class();
+            }
+        }
+
+        return $object;
     }
 }

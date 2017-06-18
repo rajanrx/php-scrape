@@ -20,4 +20,5 @@ before_install:
 
 script:
   - ./bin/phpcs -p
+  - ./bin/phpmd --exclude '*Test.php,*TestCase.php' ./Scraper/ text codesize
   - ./bin/concise
