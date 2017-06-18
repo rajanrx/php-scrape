@@ -1,5 +1,6 @@
 <?php
 
+use Scraper\Structure\AnchorField;
 use Scraper\Structure\RegexField;
 use Scraper\Structure\TextField;
 
@@ -19,11 +20,10 @@ $configuration->setFields(
                 'xpath' => './/div[1]/h3/a'
             ]
         ),
-        new TextField(
+        new AnchorField(
             [
                 'name' => 'repo_url',
                 'xpath' => './/div[1]/h3/a',
-                'property' => 'href'
             ]
         ),
         new TextField(

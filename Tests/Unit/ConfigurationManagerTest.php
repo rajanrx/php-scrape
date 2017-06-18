@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Concise\Core\TestCase;
 use Scraper\Scrape\ConfigurationManager;
+use Scraper\Structure\AnchorField;
 use Scraper\Structure\Configuration;
 use Scraper\Structure\RegexField;
 use Scraper\Structure\TextField;
@@ -60,11 +61,10 @@ class ConfigurationManagerTest extends TestCase
                         'xpath' => './/div[1]/h3/a',
                     ]
                 ),
-                new TextField(
+                new AnchorField(
                     [
                         'name'     => 'repo_url',
                         'xpath'    => './/div[1]/h3/a',
-                        'property' => 'href',
                     ]
                 ),
                 new TextField(
