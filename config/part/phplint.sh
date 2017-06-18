@@ -1,3 +1,3 @@
 # phpcs
-'vendor/bin/phpcs -p'
+'vendor/squizlabs/php_codesniffer/bin/phpcs -p'
 
