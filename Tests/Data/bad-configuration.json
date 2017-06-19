@@ -1,0 +1,13 @@
+{
+  "browserType": null,
+  "targetXPath": "",
+  "targetCssPath": null,
+  "rowXPath": "",
+  "rowCssPath": null,
+  "fields": [
+    {
+      "phpClass": "foo"
+    }
+  ],
+  "phpClass": "Scraper\\Structure\\InvalidClass"
+}

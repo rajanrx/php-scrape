@@ -2,6 +2,7 @@
 
 namespace Scraper\Scrape;
 
+use Scraper\Exception\InvalidFileException;
 use Scraper\Structure\Configuration;
 
 class ConfigurationManager
@@ -17,7 +18,9 @@ class ConfigurationManager
 
     public static function getInstance($fileName)
     {
-        if (null === static::$instance) {
+        if (static::$instance === null ||
+            static::$instance->fileName != $fileName
+        ) {
             $self = new static();
             $self->fileName = $fileName;
             $self->getOrCreateConfiguration();
@@ -31,7 +34,7 @@ class ConfigurationManager
     {
         $config = file_get_contents($this->fileName);
         if ($config === false) {
-            throw new \Exception(
+            throw new InvalidFileException(
                 'Unable to open file ' . $this->fileName
             );
         }
@@ -64,6 +67,7 @@ class ConfigurationManager
     public function save(Configuration $configuration = null)
     {
         $configuration = $configuration ?: $this->configuration;
+
         return file_put_contents(
             $this->fileName,
             json_encode(

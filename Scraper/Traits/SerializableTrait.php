@@ -2,6 +2,9 @@
 
 namespace Scraper\Traits;
 
+use Scraper\Exception\BadConfigurationException;
+use Scraper\Exception\InvalidFileException;
+
 trait SerializableTrait
 {
     public function toArray()
@@ -25,8 +28,8 @@ trait SerializableTrait
 
     public static function getObjectFromJson($json)
     {
-        if (!self::isJson($json)) {
-            throw new \Exception('Invalid JSON file provided');
+        if (self::isJson($json) === false) {
+            throw new InvalidFileException('Invalid JSON file provided');
         }
         $array = json_decode($json);
 
@@ -66,21 +69,32 @@ trait SerializableTrait
     /**
      * @param $element
      * @return array
+     * @throws BadConfigurationException
      */
     protected static function getObject($element)
     {
         $object = [];
         if (is_array($element) && array_key_exists('phpClass', $element)) {
-            $class = $element['phpClass'];
-            $object = new $class();
+            $namespace = $element['phpClass'];
+            $object = self::getObjectFromClassNamespace($namespace);
         } else {
             if (is_object($element) && property_exists($element, 'phpClass')) {
                 /** @noinspection PhpUndefinedFieldInspection */
-                $class = $element->phpClass;
-                $object = new $class();
+                $namespace = $element->phpClass;
+                $object = self::getObjectFromClassNamespace($namespace);
             }
         }
 
         return $object;
+    }
+
+    protected static function getObjectFromClassNamespace($namespace)
+    {
+        if (!class_exists($namespace)) {
+            throw new BadConfigurationException(
+                'Provided class does not exists'
+            );
+        }
+        return new $namespace();
     }
 }

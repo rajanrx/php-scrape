@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Concise\Core\TestCase;
+use Scraper\Exception\InvalidFileException;
 use Scraper\Scrape\ConfigurationManager;
 use Scraper\Structure\AnchorField;
 use Scraper\Structure\Configuration;
@@ -63,8 +64,8 @@ class ConfigurationManagerTest extends TestCase
                 ),
                 new AnchorField(
                     [
-                        'name'     => 'repo_url',
-                        'xpath'    => './/div[1]/h3/a',
+                        'name'  => 'repo_url',
+                        'xpath' => './/div[1]/h3/a',
                     ]
                 ),
                 new TextField(
@@ -103,13 +104,33 @@ class ConfigurationManagerTest extends TestCase
         $this->assertInstanceOf(TextField::class, $fields[0]);
         $this->assertInstanceOf(TextField::class, $fields[1]);
         $this->assertInstanceOf(TextField::class, $fields[2]);
-        $this->assertTrue($fields[3] instanceof  RegexField);
+        $this->assertTrue($fields[3] instanceof RegexField);
         $this->assertEquals('repo_name', $fields[0]->name);
         $this->assertEquals('.//div[1]/h3/a', $fields[0]->xpath);
         $this->assertEquals(null, $fields[0]->cssPath);
         $this->assertEquals(null, $fields[0]->property);
         $this->assertEquals(false, $fields[0]->canBeEmpty);
         $this->assertEquals('/(\d*)\s[stars]/', $fields[3]->regex);
+    }
+
+    /**
+     * @expectedException   \Scraper\Exception\InvalidFileException
+     * @expectedExceptionMessage Invalid JSON file provided
+     */
+    public function testConfigurationShouldBeValidJson()
+    {
+        ConfigurationManager::getInstance(self::$dir . '/foo.txt');
+    }
+
+    /**
+     * @expectedException   \Scraper\Exception\BadConfigurationException
+     * @expectedExceptionMessage Provided class does not exists
+     */
+    public function testNonExistingConfigurationClassThrowsException()
+    {
+        ConfigurationManager::getInstance(
+            self::$dir . '/bad-configuration.json'
+        );
     }
 
     protected function getJsonData()
