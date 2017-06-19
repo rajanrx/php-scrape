@@ -1,13 +1,13 @@
-# php-scrape [![Build Status](https://travis-ci.org/rajanrx/php-scrape.svg?branch=master)](https://travis-ci.org/rajanrx/php-scrape)
+# PHP Scrape [![Build Status](https://travis-ci.org/rajanrx/php-scrape.svg?branch=master)](https://travis-ci.org/rajanrx/php-scrape)
 A scraping framework written in PHP
 
-## About PHP-scrape
+## About PHP Scrape
 Php Scrape is a basic scraping framework for PHP based on configuration first
 concept. i.e once implemented changes should be made on configuration file as far
 as possible avoiding need for code update/addition.
 
 ## Getting Started
-The easiest way to use Php-Scrape is via Composer.
+The easiest way to use PHP Scrape is via Composer.
 ```
 composer require --dev rajanrx/php-scrape
 ```
@@ -25,15 +25,23 @@ code
 use Scraper\Scrape\Crawler\Types\GeneralCrawler;
 use Scraper\Scrape\Extractor\Types\MultipleRowExtractor;
 require_once(__DIR__ . '/../vendor/autoload.php');
-date_default_timezone_set('UTC');
+
+// Grab the crawler
 $crawler = new GeneralCrawler('https://github.com/trending');
+
+// Get config using configuration manager
 $path = __DIR__ . "/Data/git-repo.json";
 $configurationManager =
     \Scraper\Scrape\ConfigurationManager::getInstance($path);
+
+// Run extractor (Multiple) as we need to grab multiple rows for Github 
+// trending repos
 $extractor = new MultipleRowExtractor(
     $crawler, $configurationManager->getConfiguration()
 );
 $data = $extractor->extract();
+
+// Print retrieved data
 print_r($data);
 ```
 
@@ -69,7 +77,7 @@ Array
         )
   ...
 ```
-As easy as that. Docs in detail will be updated soon. 
+As easy as that. Docs in detail will be updated soon.
 Interested contributors are hearty welcome.
 
 ## Security Vulnerabilities
