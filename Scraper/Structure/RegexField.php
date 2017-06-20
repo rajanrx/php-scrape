@@ -20,21 +20,20 @@ class RegexField extends Field implements FieldInterface
     private function parseRegex($string)
     {
         preg_match_all($this->regex, $string, $matches, PREG_SET_ORDER);
-
         if (!count($matches)) {
             return null;
         }
 
-        if (count($matches) == 1) {
+        if (count($matches[0]) == 1) {
             return $matches[0][1];
         }
 
         $results = [];
-        foreach ($matches as $match) {
-            if (empty($match[1])) {
+        foreach ($matches[0] as $k => $match) {
+            if (empty($match) || $k == 0) {
                 continue;
             }
-            $results[] = $match[1];
+            $results[] = $match;
         }
 
         if (count($results) == 1) {
