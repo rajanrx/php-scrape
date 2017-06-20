@@ -4,6 +4,7 @@ namespace Scraper\Scrape\Extractor\Types;
 
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
+use Scraper\Exception\BadConfigurationException;
 
 /**
  * Class MultipleRowExtractor
@@ -79,7 +80,7 @@ class MultipleRowExtractor extends SingleRowExtractor
     /**
      * @param NodeElement     $rootElement
      * @param DocumentElement $currentUrlNode
-     * @return mixed
+     * @return NodeElement
      * @throws \Exception
      */
     protected function getRootElement(
@@ -100,10 +101,11 @@ class MultipleRowExtractor extends SingleRowExtractor
                 $this->retryForJavascript($currentUrlNode, $rootElement);
         }
 
-
         if ($rootElement == null) {
-            throw new \Exception(
-                'Multiple Extractor Error : Could not select root element'
+            throw new BadConfigurationException(
+                'Multiple Extractor Error : Could not select root element (' .
+                $this->configuration->getTargetXPath() .
+                ')'
             );
         }
 

@@ -2,6 +2,7 @@
 
 namespace Scraper\Scrape\Extractor\Types;
 
+use Scraper\Exception\BadConfigurationException;
 use Scraper\Scrape\Extractor\BaseExtractor;
 use Scraper\Structure\DateField;
 use Scraper\Structure\FieldInterface;
@@ -25,7 +26,6 @@ class SingleRowExtractor extends BaseExtractor
      */
     public function extract($rootElement = null)
     {
-
         $fields = [];
 
         if ($rootElement == null) {
@@ -36,14 +36,14 @@ class SingleRowExtractor extends BaseExtractor
         }
 
         if ($rootElement == null) {
-            throw new \Exception(
+            throw new BadConfigurationException(
                 'Single Extractor Error : Could not select root element'
             );
         }
 
         foreach ($this->configuration->getFields() as $field) {
             if (!$field instanceof FieldInterface) {
-                throw new \Exception('Field should be of type FieldInterface');
+                throw new BadConfigurationException('Field should be of type FieldInterface');
             }
             if (isset($field->xpath)) {
                 $element = $rootElement->find('xpath', $field->xpath);

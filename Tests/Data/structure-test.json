@@ -1,0 +1,9 @@
+{
+    "browserType": null,
+    "targetXPath": "\/\/div[@class=\"parent\"]",
+    "targetCssPath": null,
+    "rowXPath": "\/\/ul\/li",
+    "rowCssPath": null,
+    "fields": [],
+    "phpClass": "Scraper\\Structure\\Configuration"
+}
