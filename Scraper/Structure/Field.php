@@ -22,7 +22,7 @@ abstract class Field
     public function setAttributes($array = [])
     {
         foreach ($array as $key => $value) {
-            if (property_exists($this, $key) && $value != null) {
+            if (property_exists($this, $key) && $value !== null) {
                 $this->$key = $value;
             }
         }

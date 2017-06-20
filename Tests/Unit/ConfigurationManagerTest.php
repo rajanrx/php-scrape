@@ -102,7 +102,7 @@ class ConfigurationManagerTest extends TestCase
         $fields = $configuration->getFields();
         $this->assertEquals(4, count($fields));
         $this->assertInstanceOf(TextField::class, $fields[0]);
-        $this->assertInstanceOf(TextField::class, $fields[1]);
+        $this->assertInstanceOf(AnchorField::class, $fields[1]);
         $this->assertInstanceOf(TextField::class, $fields[2]);
         $this->assertTrue($fields[3] instanceof RegexField);
         $this->assertEquals('repo_name', $fields[0]->name);

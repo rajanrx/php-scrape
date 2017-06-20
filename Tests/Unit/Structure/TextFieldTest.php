@@ -38,7 +38,7 @@ class TextFieldTest extends StructureTest
         $this->assertContains('first row', $data[0]['header']);
         $this->assertContains('second row', $data[1]['header']);
 
-        $this->assertContains('first-header', $data[0]['headerId']);
-        $this->assertContains('second-header', $data[1]['headerId']);
+        $this->assertEquals('first-header', $data[0]['headerId']);
+        $this->assertEquals('second-header', $data[1]['headerId']);
     }
 }

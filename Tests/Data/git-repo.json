@@ -15,7 +15,6 @@
         },
         {
             "convertRelativeUrl": true,
-            "property": null,
             "name": "repo_url",
             "xpath": ".\/\/div[1]\/h3\/a",
             "cssPath": null,

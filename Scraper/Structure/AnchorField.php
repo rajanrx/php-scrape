@@ -5,7 +5,7 @@ namespace Scraper\Structure;
 use Behat\Mink\Element\NodeElement;
 use Scraper\Scrape\Crawler\BaseCrawler;
 
-class AnchorField extends TextField implements FieldInterface
+class AnchorField extends Field implements FieldInterface
 {
     const HREF = 'href';
     public $convertRelativeUrl = true;
@@ -14,8 +14,7 @@ class AnchorField extends TextField implements FieldInterface
         NodeElement $nodeElement,
         BaseCrawler $baseCrawler = null
     ) {
-        $this->property = self::HREF;
-        $url = parent::extractData($nodeElement);
+        $url = $nodeElement->getAttribute(self::HREF);
         if ($this->convertRelativeUrl) {
             return $this->getFullUrl($url, $baseCrawler);
         }
