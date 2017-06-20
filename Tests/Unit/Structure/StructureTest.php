@@ -20,9 +20,6 @@ class StructureTest extends TestCase
         parent::setUp();
         $dir = realpath(__DIR__ . '/../../Data');
         $file = $dir . "/structure-test.json";
-        if (file_exists($file)) {
-            unlink($file);
-        }
         $this->configurationManager = ConfigurationManager::getInstance($file);
         $configuration = $this->configurationManager->getConfiguration();
         $configuration->setTargetXPath('//div[@class="parent"]');
@@ -31,5 +28,13 @@ class StructureTest extends TestCase
 
         $crawler = new GeneralCrawler('http://localhost:1349/sample.html');
         $this->extractor = new MultipleRowExtractor($crawler, $configuration);
+    }
+
+    public function testLocalhostCanBeAccessed()
+    {
+        $this->assertContains(
+            'This is local test page',
+            $this->extractor->crawler->getPage()->getOuterHtml()
+        );
     }
 }

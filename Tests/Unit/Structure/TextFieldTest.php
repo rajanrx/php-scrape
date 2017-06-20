@@ -11,13 +11,22 @@ class TextFieldTest extends StructureTest
     {
         parent::setUp();
         $configuration = $this->configurationManager->getConfiguration();
-        $configuration->addField(
-            new TextField(
-                [
-                    'name'  => 'header',
-                    'xpath' => './/h1',
-                ]
-            )
+        $configuration->setFields(
+            [
+                new TextField(
+                    [
+                        'name'  => 'header',
+                        'xpath' => './/h1',
+                    ]
+                ),
+                new TextField(
+                    [
+                        'name'     => 'headerId',
+                        'xpath'    => './/h1',
+                        'property' => 'id',
+                    ]
+                ),
+            ]
         );
         $this->extractor->configuration = $configuration;
     }
@@ -28,5 +37,8 @@ class TextFieldTest extends StructureTest
         $this->assertCount(2, $data);
         $this->assertContains('first row', $data[0]['header']);
         $this->assertContains('second row', $data[1]['header']);
+
+        $this->assertContains('first-header', $data[0]['headerId']);
+        $this->assertContains('second-header', $data[1]['headerId']);
     }
 }
