@@ -10,11 +10,6 @@ use Scraper\Structure\Configuration;
 
 class SingleRowExtractorTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * @expectedException   \Scraper\Exception\BadConfigurationException
      * @expectedExceptionMessage Single Extractor Error : Could not select root
@@ -26,7 +21,7 @@ class SingleRowExtractorTest extends TestCase
         $file = $dir . "/structure-test.json";
         $configurationManager = ConfigurationManager::getInstance($file);
         $configuration = $configurationManager->getConfiguration();
-        $configuration->setTargetXPath('//div[@nonExistingClass]');
+        $configuration->setTargetXPath('//div[@class="nonExistingClass"]');
 
         $extractor = $this->getExtractor($configuration);
         $extractor->extract();
