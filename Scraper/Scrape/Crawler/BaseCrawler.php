@@ -123,15 +123,6 @@ abstract class BaseCrawler
     abstract public function setNextPage($nextPageSelector = null);
 
     /**
-     * Sets Proxy in the browser driver to allow anonymous scraping
-     *
-     * @param Proxy $proxy
-     *
-     * @return mixed
-     */
-    abstract public function setProxy(Proxy $proxy);
-
-    /**
      * Return visited page history
      *
      * @return mixed
