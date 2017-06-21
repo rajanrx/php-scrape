@@ -1,0 +1,18 @@
+{
+  "browserType": null,
+  "targetXPath": "\/\/div[@class=\"parent\"]",
+  "targetCssPath": null,
+  "rowXPath": "\/\/ul\/li",
+  "rowCssPath": null,
+  "fields": [
+    {
+      "convertRelativeUrl": true,
+      "name": "repo_url",
+      "xpath": ".\/\/div[1]\/h3\/a",
+      "cssPath": null,
+      "canBeEmpty": false,
+      "phpClass": "Scraper\\Structure\\Configuration"
+    }
+  ],
+  "phpClass": "Scraper\\Structure\\Configuration"
+}

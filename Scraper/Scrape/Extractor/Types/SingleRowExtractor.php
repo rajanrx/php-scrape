@@ -4,10 +4,7 @@ namespace Scraper\Scrape\Extractor\Types;
 
 use Scraper\Exception\BadConfigurationException;
 use Scraper\Scrape\Extractor\BaseExtractor;
-use Scraper\Structure\DateField;
 use Scraper\Structure\FieldInterface;
-use Scraper\Structure\HtmlField;
-use Scraper\Structure\RegexField;
 
 /**
  * Class SingleRowExtractor
