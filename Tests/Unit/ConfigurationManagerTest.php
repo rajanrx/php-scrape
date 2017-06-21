@@ -133,6 +133,19 @@ class ConfigurationManagerTest extends TestCase
         );
     }
 
+    /**
+     * @expectedException \Scraper\Exception\InvalidFileException
+     * @expectedExceptionMessage Unable to open file
+     * @depends testConfigurationCanBeLoadedFromJson
+     */
+    public function testConfigurationManagerCanOnlyBeInstantiated()
+    {
+        if (file_exists(self::$jsonFile)) {
+            unlink(self::$jsonFile);
+        }
+        $this->configurationManager->getConfiguration();
+    }
+
     protected function getJsonData()
     {
         $jsonData = file_get_contents(self::$jsonFile);

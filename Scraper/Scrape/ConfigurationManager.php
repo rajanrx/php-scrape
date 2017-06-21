@@ -32,13 +32,12 @@ class ConfigurationManager
 
     public function getConfiguration()
     {
-        $config = file_get_contents($this->fileName);
-        if ($config === false) {
+        if (!file_exists($this->fileName)) {
             throw new InvalidFileException(
                 'Unable to open file ' . $this->fileName
             );
         }
-
+        $config = file_get_contents($this->fileName);
         $this->configuration = Configuration::getObjectFromJson($config);
 
         return $this->configuration;
@@ -79,22 +78,16 @@ class ConfigurationManager
 
     /**
      * is not allowed to call from outside: private!
+     * @codeCoverageIgnore
      */
     private function __construct()
     {
     }
 
     /**
-     * @param Configuration $configuration
-     */
-    public function setConfiguration($configuration)
-    {
-        $this->configuration = $configuration;
-    }
-
-    /**
      * prevent the instance from being cloned
      *
+     * @codeCoverageIgnore
      * @return void
      */
     private function __clone()
@@ -104,6 +97,7 @@ class ConfigurationManager
     /**
      * prevent from being un-serialized
      *
+     * @codeCoverageIgnore
      * @return void
      */
     private function __wakeup()
