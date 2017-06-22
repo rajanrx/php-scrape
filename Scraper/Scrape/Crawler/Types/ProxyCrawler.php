@@ -8,6 +8,11 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
 use Goutte\Client;
 
+/**
+ * Class ProxyCrawler
+ * @package Scraper\Scrape\Crawler\Types
+ * @codeCoverageIgnore
+ */
 class ProxyCrawler extends GeneralCrawler
 {
     /**

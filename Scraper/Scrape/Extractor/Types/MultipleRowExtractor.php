@@ -54,6 +54,7 @@ class MultipleRowExtractor extends SingleRowExtractor
      * @param NodeElement     $rootElement
      * @param DocumentElement $currentUrlNode
      * @return mixed
+     * @codeCoverageIgnore
      */
     protected function retryForJavascript(
         DocumentElement $currentUrlNode,

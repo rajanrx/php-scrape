@@ -31,6 +31,59 @@ class MultipleRowExtractorTest extends TestCase
     public function testCanScrapeMultipleRows()
     {
         $dir = realpath(__DIR__ . '/../../../Data');
+        $configuration = $this->getMultipleRowConfig();
+        $extractor = $this->getExtractor($configuration);
+        $data = $extractor->extract();
+        foreach ($data as &$row) {
+            unset($row['hash']);
+        }
+        $jsonData =
+            json_decode(
+                file_get_contents($dir . '/multiple-rows.json'),
+                true
+            );
+        $expectedData = [
+            $jsonData[0],
+            $jsonData[1],
+            $jsonData[2],
+        ];
+        $this->assertEquals(json_encode($expectedData), json_encode($data));
+    }
+
+    public function testCanScrapeMultiplePage()
+    {
+        $dir = realpath(__DIR__ . '/../../../Data');
+        $configuration = $this->getMultipleRowConfig();
+        $extractor =
+            $this->getExtractor($configuration, '//div[@class="pager"]/a');
+        $count = 0;
+        $renderedPage = null;
+        while (true) {
+            if ($count == 0) {
+                $renderedPage = $extractor->crawler->getPage();
+            } else {
+                $renderedPage = $extractor->crawler->getNextPage();
+            }
+            if ($renderedPage == null) {
+                break;
+            }
+            $data = $extractor->extract();
+            $this->assertEquals($count + 1, $data[0]['id']);
+            $this->assertEquals($count + 2, $data[1]['id']);
+            $this->assertEquals($count + 3, $data[2]['id']);
+            $count += 3;
+        }
+        $jsonData =
+            json_decode(
+                file_get_contents($dir . '/multiple-rows.json'),
+                true
+            );
+        $this->assertEquals(count($jsonData), $count);
+    }
+
+    protected function getMultipleRowConfig()
+    {
+        $dir = realpath(__DIR__ . '/../../../Data');
         $file = $dir . "/structure-test.json";
         $configurationManager = ConfigurationManager::getInstance($file);
         $configuration = $configurationManager->getConfiguration();
@@ -54,30 +107,23 @@ class MultipleRowExtractorTest extends TestCase
             ]
         );
 
-        $extractor = $this->getExtractor($configuration);
-        $data = $extractor->extract();
-        foreach ($data as &$row) {
-            unset($row['hash']);
-        }
-        $expectedData = file_get_contents($dir . '/multiple-rows.json');
-        $this->assertJsonStringEqualsJsonFile(
-            $dir . '/multiple-rows.json',
-            json_encode($data)
-        );
-    }
-
-    public function testCanScrapeMultiplePage()
-    {
+        return $configuration;
     }
 
     /**
      * @param Configuration $configuration
+     * @param null          $nextPageSelector
      * @return MultipleRowExtractor
      */
-    protected function getExtractor(Configuration $configuration)
-    {
+    protected function getExtractor(
+        Configuration $configuration,
+        $nextPageSelector = null
+    ) {
         $crawler =
-            new GeneralCrawler('http://localhost:1349/multiple-rows.php');
+            new GeneralCrawler(
+                'http://localhost:1349/multiple-rows.php',
+                $nextPageSelector
+            );
         $extractor = new MultipleRowExtractor($crawler, $configuration);
         $extractor->configuration = $configuration;
 
