@@ -85,17 +85,6 @@ abstract class BaseCrawler
     }
 
     /**
-     * Sets relay network ahead of the url. Useful when using TOR Relay networks
-     *
-     * @param $relayNetwork
-     */
-    public function setRelayNetwork($relayNetwork)
-    {
-
-        $this->currentUrl = $relayNetwork . $this->currentUrl;
-    }
-
-    /**
      * Gets current page
      *
      * @param bool $forceReload

@@ -11,7 +11,7 @@ use Goutte\Client;
 /**
  * Class ProxyCrawler
  * @package Scraper\Scrape\Crawler\Types
- * @codeCoverageIgnore
+ *
  */
 class ProxyCrawler extends GeneralCrawler
 {
@@ -22,6 +22,7 @@ class ProxyCrawler extends GeneralCrawler
      *
      * @return mixed|void
      * @throws \Exception
+     * @codeCoverageIgnore
      */
     public function setProxy(Proxy $proxy)
     {

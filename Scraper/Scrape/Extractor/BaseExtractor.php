@@ -41,6 +41,7 @@ abstract class BaseExtractor
 
     /**
      * Returns class name
+     * @codeCoverageIgnore
      *
      * @return string
      */
@@ -52,6 +53,7 @@ abstract class BaseExtractor
 
     /**
      * Extracts data from crawled markup
+     * @codeCoverageIgnore
      *
      * @return mixed
      */
