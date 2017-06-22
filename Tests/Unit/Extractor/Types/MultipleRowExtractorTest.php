@@ -79,6 +79,19 @@ class MultipleRowExtractorTest extends TestCase
                 true
             );
         $this->assertEquals(count($jsonData), $count);
+        $historyData = $extractor->crawler->getPageHistory();
+        $this->assertEquals(
+            'http://localhost:1349/multiple-rows.php',
+            $historyData[0]['url']
+        );
+        $this->assertEquals(
+            'http://localhost:1349/multiple-rows.php?page=1',
+            $historyData[1]['url']
+        );
+        $this->assertEquals(
+            'http://localhost:1349/multiple-rows.php?page=2',
+            $historyData[2]['url']
+        );
     }
 
     public function testCrawlingHaltsIfHashMatches()

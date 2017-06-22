@@ -109,6 +109,7 @@ class GeneralCrawler extends BaseCrawler
      */
     public function getPageHistory()
     {
+        $this->setPageHistory();
         return $this->pageHistory;
     }
 }

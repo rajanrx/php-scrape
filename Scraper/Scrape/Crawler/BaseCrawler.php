@@ -71,7 +71,7 @@ abstract class BaseCrawler
         $this->javaScriptRequired = $javaScriptRequired;
 
         $this->setBrowser($driver);
-        $this->setPageHistory();
+        //$this->setPageHistory();
     }
 
     /**
