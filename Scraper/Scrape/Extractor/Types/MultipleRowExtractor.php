@@ -125,15 +125,15 @@ class MultipleRowExtractor extends SingleRowExtractor
         // Todo : this has to be replaced by deleting the recorded rows so
         // that new records will always be there and hence no redundancy
 
-        $recordExists = false;
         foreach ($results as $res) {
-            if ($res['hash'] == $result['hash']) {
-                $recordExists = true;
-                break;
+            if ($res['hash'] == $result['hash'] ||
+                in_array($result['hash'], $this->stopAtHash)
+            ) {
+                return true;
             }
         }
 
-        return $recordExists;
+        return false;
     }
 
     /**
@@ -165,6 +165,7 @@ class MultipleRowExtractor extends SingleRowExtractor
             if ($this->checkShouldHalt($result, $hashMatched)) {
                 // Todo: remove max page hack
                 $this->crawler->maxPages = 1; // Forcefully break the crawling
+
                 return $results;
             }
 

@@ -81,6 +81,38 @@ class MultipleRowExtractorTest extends TestCase
         $this->assertEquals(count($jsonData), $count);
     }
 
+    public function testCrawlingHaltsIfHashMatches()
+    {
+        $dir = realpath(__DIR__ . '/../../../Data');
+        $jsonData =
+            json_decode(
+                file_get_contents($dir . '/multiple-rows.json'),
+                true
+            );
+        $configuration = $this->getMultipleRowConfig();
+        $extractor =
+            $this->getExtractor($configuration);
+        $extractor->stopAtHash = [md5(json_encode($jsonData[2]))];
+
+        $data = $extractor->extract();
+        $expectedData = [
+            $jsonData[0],
+            $jsonData[1],
+        ];
+        foreach ($data as &$row) {
+            unset($row['hash']);
+        }
+        $this->assertEquals(json_encode($expectedData), json_encode($data));
+
+        $extractor->stopAtHash[] = md5(json_encode($jsonData[1]));
+        $extractor->minHashMatch = 2;
+        $data = $extractor->extract();
+        foreach ($data as &$row) {
+            unset($row['hash']);
+        }
+        $this->assertEquals(json_encode([$jsonData[0]]), json_encode($data));
+    }
+
     protected function getMultipleRowConfig()
     {
         $dir = realpath(__DIR__ . '/../../../Data');
