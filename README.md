@@ -4,7 +4,7 @@ A simple, easy to use, scalable scraping framework written in PHP
 ## About PHP Scrape
 Php Scrape is a basic scraping framework for PHP based on configuration first
 concept. i.e once implemented changes should be made on configuration file as far
-as possible avoiding need for code update/addition.Also, you can extend/Customize
+as possible avoiding need for code update/addition. Also, you can extend/Customize
 this framework to any level or use components (Extractor, Crawler) separately if 
 you just need to use them.
 
@@ -32,7 +32,7 @@ configurable, maintainable and (extend/customize)able scraping projects.
 ## Getting Started
 The easiest way to use PHP Scrape is via Composer.
 ```
-composer require rajanrx/php-scrape ^1.1.1
+composer require rajanrx/php-scrape:^1.1.1
 ```
 
 You need to create configuration file to start scraping. You can do it either by 
