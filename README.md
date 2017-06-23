@@ -47,6 +47,7 @@ code
 
 ```php
 <?php
+use Scraper\Scrape\ConfigurationManager;
 use Scraper\Scrape\Crawler\Types\GeneralCrawler;
 use Scraper\Scrape\Extractor\Types\MultipleRowExtractor;
 require_once(__DIR__ . '/../vendor/autoload.php');
@@ -56,8 +57,7 @@ $crawler = new GeneralCrawler('https://github.com/trending');
 
 // Get config using configuration manager
 $path = __DIR__ . "/Data/git-repo.json";
-$configurationManager =
-    \Scraper\Scrape\ConfigurationManager::getInstance($path);
+$configurationManager = ConfigurationManager::getInstance($path);
 
 // Run extractor (Multiple) as we need to grab multiple rows for Github 
 // trending repos
