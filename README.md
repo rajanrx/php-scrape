@@ -101,9 +101,9 @@ Array
   ...
 ```
 As simple as that. 
-Docs in detail will be updated soon.Meanwhile the doc is not available please 
+Docs in detail will be updated soon.Meanwhile until the doc is not available please 
 see [Multi Row Extractor Test](https://github.com/rajanrx/php-scrape/blob/master/Tests/Unit/Extractor/Types/MultipleRowExtractorTest.php) 
-to figure out how you can scrape paginated records
+to figure out how you can scrape paginated records.
 
 Please let me know if you have any suggestions to make this codebase better. I am
 happy to assist if you get stuck on your scraping project :). Feel free to ping me.
