@@ -115,3 +115,7 @@ Interested contributors are welcome.
 
 This framework is open-sourced software licensed under the 
 [MIT license](http://opensource.org/licenses/MIT). 
+
+If you are happy and want to buy me a coffee 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ND8GEY5QKW6TG)
+then why not :). 
