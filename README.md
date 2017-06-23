@@ -12,13 +12,15 @@ Following are the key points which you can use/expect in future:
 
 - [x] Scrape in console or browser
 - [x] Use hash to escape duplicate scraping (or halt further scraping)
+- [x] Generate editable configuration file using PHP code
+- [x] Ability to extend own scraping components
 - [ ] Add complete wiki for general and advance usage instructions
 - [x] Add test coverage for command line scraping (> 80%)
 - [ ] Add test coverage for Javascript scraping
 - [ ] Allow use of proxy to scrape anonymously
 - [ ] Generate automated integration test for scraping to ensure data integrity 
 
-## Why Need For yet another git repo
+## Why Need For yet another git repo ?
 One of the biggest problem in scraping data is the source gets changed and we 
 have to update our codebase to get it working. As the codebase increases it is
 harder to maintain and even annoying looking for the place to update if someone
