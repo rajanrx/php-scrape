@@ -1,6 +1,14 @@
 {
   "name": "rajanrx/php-scrape",
-  "description": "A scraping framework written in PHP",
+  "description": "A simple, easy to use, scalable scraping framework written in PHP",
+  "authors": [
+    {
+      "name": "Rajan Rauniyar",
+      "email": "rajanrauniyar@gmail.com",
+      "homepage": "https://www.linkedin.com/in/rajanrauniyar/",
+      "role": "Developer"
+    }
+  ],
   "keywords": [
     "scrape",
     "framework",

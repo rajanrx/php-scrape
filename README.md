@@ -1,15 +1,38 @@
 # PHP Scrape [![Build Status](https://travis-ci.org/rajanrx/php-scrape.svg?branch=master)](https://travis-ci.org/rajanrx/php-scrape)
-A scraping framework written in PHP
+A simple, easy to use, scalable scraping framework written in PHP
 
 ## About PHP Scrape
 Php Scrape is a basic scraping framework for PHP based on configuration first
 concept. i.e once implemented changes should be made on configuration file as far
-as possible avoiding need for code update/addition.
+as possible avoiding need for code update/addition.Also, you can extend/Customize
+this framework to any level or use components (Extractor, Crawler) separately if 
+you just need to use them.
+
+Following are the key points which you can use/expect in future:
+
+- [x] Scrape in console or browser
+- [x] Use hash to escape duplicate scraping (or halt further scraping)
+- [ ] Add complete wiki for general and advance usage instructions
+- [x] Add test coverage for command line scraping (> 80%)
+- [ ] Add test coverage for Javascript scraping
+- [ ] Allow use of proxy to scrape anonymously
+- [ ] Generate automated integration test for scraping to ensure data integrity 
+
+## Why Need For yet another git repo
+One of the biggest problem in scraping data is the source gets changed and we 
+have to update our codebase to get it working. As the codebase increases it is
+harder to maintain and even annoying looking for the place to update if someone
+new to codebase has to maintain it. Also different projects has their own unique
+requirements (made even harder by varieties/complexity of data sources) which might 
+not be addressed by lots of libraries for not being generic enough. 
+So in order to help facilitate developers tackle these problems, I have tried to
+come up with a generic, flexible solution that might help them to write easily
+configurable, maintainable and (extend/customize)able scraping projects.
 
 ## Getting Started
 The easiest way to use PHP Scrape is via Composer.
 ```
-composer require --dev rajanrx/php-scrape
+composer require rajanrx/php-scrape ^1.1.1
 ```
 
 You need to create configuration file to start scraping. You can do it either by 
@@ -77,14 +100,14 @@ Array
         )
   ...
 ```
-As easy as that. Docs in detail will be updated soon.
-Interested contributors are hearty welcome.
+As simple as that. 
+Docs in detail will be updated soon.Meanwhile the doc is not available please 
+see [Multi Row Extractor Test](https://github.com/rajanrx/php-scrape/blob/master/Tests/Unit/Extractor/Types/MultipleRowExtractorTest.php) 
+to figure out how you can scrape paginated records
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability, please send an e-mail to
-Rajan Rauniyar at rajanrauniyar@gmail.com.
-All security vulnerabilities will be promptly addressed.
+Please let me know if you have any suggestions to make this codebase better. I am
+happy to assist if you get stuck on your scraping project :). Feel free to ping me.
+Interested contributors are welcome.
 
 ## License
 
