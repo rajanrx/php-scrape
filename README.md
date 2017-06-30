@@ -111,6 +111,12 @@ Please let me know if you have any suggestions to make this codebase better. I a
 happy to assist if you get stuck on your scraping project :). Feel free to ping me.
 Interested contributors are welcome.
 
+## Partners
+<img src="http://www.browserstack.com/images/layout/browserstack-logo-600x315.png" width="280"/>
+
+[BrowserStack](http://www.browserstack.com) is supporting PHP Scrape, allowing us to use their service and infrastructure to test the code in this repository. Thank you for supporting the open source community!
+
+ 
 ## License
 
 This framework is open-sourced software licensed under the 
